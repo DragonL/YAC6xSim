@@ -1,0 +1,105 @@
+jit-cpp-mangle.lo: jit-cpp-mangle.c ../include/jit/jit-dynamic.h \
+ ../include/jit/jit-common.h ../include/jit/jit-defs.h \
+ ../include/jit/jit.h ../include/jit/jit-context.h \
+ ../include/jit/jit-apply.h ../include/jit/jit-type.h \
+ ../include/jit/jit-block.h ../include/jit/jit-debugger.h \
+ ../include/jit/jit-elf.h ../include/jit/jit-except.h \
+ ../include/jit/jit-function.h ../include/jit/jit-init.h \
+ ../include/jit/jit-insn.h ../include/jit/jit-intrinsic.h \
+ ../include/jit/jit-meta.h ../include/jit/jit-objmodel.h \
+ ../include/jit/jit-opcode.h ../include/jit/jit-unwind.h \
+ ../include/jit/jit-arch.h ../include/jit/jit-util.h \
+ ../include/jit/jit-value.h ../include/jit/jit-walk.h ../config.h \
+ /usr/include/stdio.h /usr/include/features.h /usr/include/bits/predefs.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+ /usr/lib/gcc/i686-linux-gnu/4.4.5/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /usr/lib/gcc/i686-linux-gnu/4.4.5/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/bits/stdio2.h
+
+../include/jit/jit-dynamic.h:
+
+../include/jit/jit-common.h:
+
+../include/jit/jit-defs.h:
+
+../include/jit/jit.h:
+
+../include/jit/jit-context.h:
+
+../include/jit/jit-apply.h:
+
+../include/jit/jit-type.h:
+
+../include/jit/jit-block.h:
+
+../include/jit/jit-debugger.h:
+
+../include/jit/jit-elf.h:
+
+../include/jit/jit-except.h:
+
+../include/jit/jit-function.h:
+
+../include/jit/jit-init.h:
+
+../include/jit/jit-insn.h:
+
+../include/jit/jit-intrinsic.h:
+
+../include/jit/jit-meta.h:
+
+../include/jit/jit-objmodel.h:
+
+../include/jit/jit-opcode.h:
+
+../include/jit/jit-unwind.h:
+
+../include/jit/jit-arch.h:
+
+../include/jit/jit-util.h:
+
+../include/jit/jit-value.h:
+
+../include/jit/jit-walk.h:
+
+../config.h:
+
+/usr/include/stdio.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/predefs.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-32.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.4.5/include/stddef.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.4.5/include/stdarg.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+/usr/include/bits/stdio2.h:

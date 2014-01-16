@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{615BFD02-E622-4587-B430-53DDAB50F2A3}</ProjectGuid>
+    <RootNamespace>C6xSim</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>C6xpSim</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../p3/readline/include;../p3/pcre/include;../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;MD_CROSS_ENDIAN;CORE_ALL_SPEED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>readline.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../p3/readline/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>../p3/libjit/include;../p3/llvm/bin/include;../p3/llvm/include;../p3/readline/include;../p3/pcre/include;../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CONSOLE;MD_CROSS_ENDIAN;CORE_ALL_SPEED;CORE_USE_INST_CACHE;CORE_CIRCULAR_N_WAY_CACHE_NO;CORE_USE_LLVM;DE_FUNC_FASTCALL;CORE_PROF;EDMA_DBG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>MaxSpeed</Optimization>
+      <CallingConvention>Cdecl</CallingConvention>
+      <GenerateAlternateCodePaths>AVX</GenerateAlternateCodePaths>
+      <InterproceduralOptimization>MultiFile</InterproceduralOptimization>
+      <LoopUnrolling>10</LoopUnrolling>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>readline.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../p3/libjit/lib;../p3/llvm/lib;../p3/readline/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <WPOAssemblyOutput>Asm_and_Source</WPOAssemblyOutput>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\inc\def.hpp" />
+    <ClInclude Include="..\common\inc\endian.hpp" />
+    <ClInclude Include="..\coff\inc\coff_def.hpp" />
+    <ClInclude Include="..\coff\inc\coff_parser.hpp" />
+    <ClInclude Include="..\coff\inc\dwarf_def.hpp" />
+    <ClInclude Include="..\common\inc\hw_timer.hpp" />
+    <ClInclude Include="..\common\inc\st.h" />
+    <ClInclude Include="..\core\inc\edma.hpp" />
+    <ClInclude Include="..\decode\inc\ep.hpp" />
+    <ClInclude Include="..\decode\inc\fp.hpp" />
+    <ClInclude Include="..\decode\inc\inst.hpp" />
+    <ClInclude Include="..\core\inc\core.hpp" />
+    <ClInclude Include="..\core\inc\ctrl_register.hpp" />
+    <ClInclude Include="..\core\inc\d_unit.hpp" />
+    <ClInclude Include="..\core\inc\dbg.hpp" />
+    <ClInclude Include="..\core\inc\l2_mem_ctrl.hpp" />
+    <ClInclude Include="..\core\inc\l_unit.hpp" />
+    <ClInclude Include="..\core\inc\m_unit.hpp" />
+    <ClInclude Include="..\core\inc\mem_block.hpp" />
+    <ClInclude Include="..\core\inc\n_unit.hpp" />
+    <ClInclude Include="..\core\inc\s_unit.hpp" />
+    <ClInclude Include="..\core\inc\timer_32bit.hpp" />
+    <ClInclude Include="..\core\inc\unit.hpp" />
+    <ClInclude Include="..\jit\inc\jit.hpp" />
+    <ClInclude Include="..\jit\inc\jit_support.hpp" />
+    <ClInclude Include="..\jit\inc\jit_thread.hpp" />
+    <ClInclude Include="..\profiler\inc\basic_block.hpp" />
+    <ClInclude Include="..\profiler\inc\common_profiler.hpp" />
+    <ClInclude Include="..\profiler\inc\exe_path_profiler.hpp" />
+    <ClInclude Include="..\profiler\inc\execution_path.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\src\def.cpp" />
+    <ClCompile Include="..\common\src\hw_timer.cpp" />
+    <ClCompile Include="..\common\src\test.cpp" />
+    <ClCompile Include="..\coff\src\coff_def.cpp" />
+    <ClCompile Include="..\coff\src\coff_p.cpp" />
+    <ClCompile Include="..\coff\src\coff_parser.cpp" />
+    <ClCompile Include="..\coff\src\dwarf_def.cpp" />
+    <ClCompile Include="..\core\src\core.cpp" />
+    <ClCompile Include="..\core\src\edma.cpp" />
+    <ClCompile Include="..\decode\src\ep.cpp" />
+    <ClCompile Include="..\decode\src\fp.cpp" />
+    <ClCompile Include="..\decode\src\inst.cpp" />
+    <ClCompile Include="..\core\src\d_unit.cpp" />
+    <ClCompile Include="..\core\src\dbg.cpp" />
+    <ClCompile Include="..\core\src\l2_mem_ctrl.cpp" />
+    <ClCompile Include="..\core\src\l_unit.cpp" />
+    <ClCompile Include="..\core\src\m_unit.cpp" />
+    <ClCompile Include="..\core\src\n_unit.cpp" />
+    <ClCompile Include="..\core\src\s_unit.cpp" />
+    <ClCompile Include="..\core\src\test_s_unit.cpp" />
+    <ClCompile Include="..\core\src\timer_32bit.cpp" />
+    <ClCompile Include="..\core\src\unit.cpp" />
+    <ClCompile Include="..\core\verif\test_m_unit.cpp" />
+    <ClCompile Include="..\jit\src\jit.cpp" />
+    <ClCompile Include="..\jit\src\jit_support.cpp" />
+    <ClCompile Include="..\jit\src\jit_thread.cpp" />
+    <ClCompile Include="..\profiler\src\basic_block.cpp" />
+    <ClCompile Include="..\profiler\src\common_profiler.cpp" />
+    <ClCompile Include="..\profiler\src\exe_path_profiler.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,129 @@
+
+@c Extracted automatically from ../jitdynamic/jit-cpp-mangle.c - DO NOT EDIT
+
+
+@cindex Name mangling
+
+Sometimes you want to retrieve a C++ method from a dynamic library
+using @code{jit_dynlib_get_symbol}.  Unfortunately, C++ name mangling
+rules differ from one system to another, making this process very
+error-prone.
+
+The functions that follow try to help.  They aren't necessarily fool-proof,
+but they should work in the most common cases.  The only alternative is
+to wrap your C++ library with C functions, so that the names are predictable.
+
+The basic idea is that you supply a description of the C++ method that
+you wish to access, and these functions return a number of candidate forms
+that you can try with @code{jit_dynlib_get_symbol}.  If one form fails,
+you move on and try the next form, until either symbol lookup succeeds
+or until all forms have been exhausted.
+
+@noindent
+The following code demonstrates how to resolve a global function:
+
+@example
+jit_dynlib_handle_t handle;
+jit_type_t signature;
+int form = 0;
+void *address = 0;
+char *mangled;
+
+while((mangled = jit_mangle_global_function
+("foo", signature, form)) != 0)
+@{
+address = jit_dynlib_get_symbol(handle, mangled);
+if(address != 0)
+@{
+break;
+@}
+jit_free(mangled);
+++form;
+@}
+
+if(address)
+@{
+printf("%s = 0x%lxn", mangled, (long)address);
+@}
+else
+@{
+printf("could not resolve foon");
+@}
+@end example
+
+This mechanism typically cannot be used to obtain the entry points for
+@code{inline} methods.  You will need to make other arrangements to
+simulate the behaviour of inline methods, or recompile your dynamic C++
+library in a mode that explicitly exports inlines.
+
+C++ method names are very picky about types.  On 32-bit systems,
+@code{int} and @code{long} are the same size, but they are mangled
+to different characters.  To ensure that the correct function is
+picked, you should use @code{jit_type_sys_int}, @code{jit_type_sys_long}, etc
+instead of the platform independent types.  If you do use a platform
+independent type like @code{jit_type_int}, this library will try to
+guess which system type you mean, but the guess will most likely be wrong.
+
+
+@deftypefun {char *} jit_mangle_global_function (const char *@var{name}, jit_type_t @var{signature}, int @var{form})
+Mangle the name of a global C++ function using the specified @var{form}.
+Returns NULL if out of memory, or if the form is not supported.
+@end deftypefun
+
+@deftypefun {char *} jit_mangle_member_function (const char *@var{class_name}, const char *@var{name}, jit_type_t @var{signature}, int @var{form}, int @var{flags})
+Mangle the name of a C++ member function using the specified @var{form}.
+Returns NULL if out of memory, or if the form is not supported.
+The following flags may be specified to modify the mangling rules:
+
+@table @code
+@vindex JIT_MANGLE_PUBLIC
+@item JIT_MANGLE_PUBLIC
+The method has @code{public} access within its containing class.
+
+@vindex JIT_MANGLE_PROTECTED
+@item JIT_MANGLE_PROTECTED
+The method has @code{protected} access within its containing class.
+
+@vindex JIT_MANGLE_PRIVATE
+@item JIT_MANGLE_PRIVATE
+The method has @code{private} access within its containing class.
+
+@vindex JIT_MANGLE_STATIC
+@item JIT_MANGLE_STATIC
+The method is @code{static}.
+
+@vindex JIT_MANGLE_VIRTUAL
+@item JIT_MANGLE_VIRTUAL
+The method is a virtual instance method.  If neither
+@code{JIT_MANGLE_STATIC} nor @code{JIT_MANGLE_VIRTUAL} are supplied,
+then the method is assumed to be a non-virtual instance method.
+
+@vindex JIT_MANGLE_CONST
+@item JIT_MANGLE_CONST
+The method is an instance method with the @code{const} qualifier.
+
+@vindex JIT_MANGLE_EXPLICIT_THIS
+@item JIT_MANGLE_EXPLICIT_THIS
+The @var{signature} includes an extra pointer parameter at the start
+that indicates the type of the @code{this} pointer.  This parameter won't
+be included in the final mangled name.
+
+@vindex JIT_MANGLE_IS_CTOR
+@item JIT_MANGLE_IS_CTOR
+The method is a constructor.  The @var{name} parameter will be ignored.
+
+@vindex JIT_MANGLE_IS_DTOR
+@item JIT_MANGLE_IS_DTOR
+The method is a destructor.  The @var{name} parameter will be ignored.
+
+@vindex JIT_MANGLE_BASE
+@item JIT_MANGLE_BASE
+Fetch the "base" constructor or destructor entry point, rather than
+the "complete" entry point.
+@end table
+
+The @var{class_name} may include namespace and nested parent qualifiers
+by separating them with @code{::} or @code{.}.  Class names that involve
+template parameters are not supported yet.
+@end deftypefun
+

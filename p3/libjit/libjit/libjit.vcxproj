@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{83AA9492-4372-481C-8AE1-0976F913A5AE}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libjit</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Intel C++ Compiler XE 13.0</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Intel C++ Compiler XE 13.0</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../libjit-0.1.2/jit;../libjit-0.1.2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeedHighLevel</Optimization>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../libjit-0.1.2/jit;../libjit-0.1.2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\libjit-0.1.2\include\config.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-apply.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-arch-generic.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-arch-x86-64.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-arch-x86.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-arch.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-block.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-common.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-context.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-debugger.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-defs.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-dump.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-dynamic.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-elf.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-except.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-function.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-init.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-insn.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-intrinsic.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-meta.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-objmodel-private.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-objmodel.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-opcode.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-plus.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-type.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-unwind.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-util.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-value.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit-walk.h" />
+    <ClInclude Include="..\libjit-0.1.2\include\jit\jit.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\libjit-0.1.2\include\jit\jit-defs.h.in" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-alloc.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-apply-x86.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-apply.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-bitset.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-block.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-cache.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-cfg.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-context.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-cpuid-x86.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-debugger.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-dump.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-elf-write.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-except.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-function.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-gen-arm.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-init.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-insn.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-interp.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-intrinsic.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-live.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-memory.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-meta.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-objmodel.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-opcode.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-pool.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-reg-alloc.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-reg-class.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-rules-interp.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-rules-x86.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-rules.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-signal.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-string.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-symbol.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-thread.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-type.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-unwind.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-value.c" />
+    <ClCompile Include="..\libjit-0.1.2\jit\jit-walk.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

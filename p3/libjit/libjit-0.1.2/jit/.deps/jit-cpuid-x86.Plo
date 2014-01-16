@@ -1,0 +1,3 @@
+jit-cpuid-x86.lo: jit-cpuid-x86.c jit-cpuid-x86.h
+
+jit-cpuid-x86.h:

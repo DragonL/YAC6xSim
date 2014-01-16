@@ -1,0 +1,99 @@
+
+@c Extracted automatically from ../jitplus/jit-plus-value.cpp - DO NOT EDIT
+
+
+The @code{jit_value} class provides a C++ counterpart to the
+@code{jit_value_t} type.  Values normally result by calling methods
+on the @code{jit_function} class during the function building process.
+@xref{Values}, for more information on creating and managing values.
+
+@defop Constructor jit_value jit_value ()
+Construct an empty value.
+@end defop
+
+@defop Constructor jit_value jit_value (jit_value_t @var{value})
+Construct a value by wrapping up a raw C @code{jit_value_t} object.
+@end defop
+
+@defop Constructor jit_value jit_value (const jit_value& @var{value})
+Create a copy of @var{value}.
+@end defop
+
+@defop Destructor jit_value ~jit_value ()
+Destroy the C++ value wrapper, but leave the underlying raw C
+value alone.
+@end defop
+
+@defop Operator jit_value {jit_value& operator=} (const jit_value& @var{value})
+Copy @code{jit_value} objects.
+@end defop
+
+@deftypemethod jit_value jit_value_t raw () const
+Get the raw C @code{jit_value_t} value that underlies this object.
+@end deftypemethod
+
+@deftypemethod jit_value int is_valid () const
+Determine if this @code{jit_value} object contains a valid raw
+C @code{jit_value_t} value.
+@end deftypemethod
+
+@deftypemethod jit_value int is_temporary () const
+@deftypemethodx jit_value int is_local () const
+@deftypemethodx jit_value int is_constant () const
+Determine if this @code{jit_value} is temporary, local, or constant.
+@end deftypemethod
+
+@deftypemethod jit_value void set_volatile ()
+@deftypemethodx jit_value int is_volatile () const
+Set or check the "volatile" state on this value.
+@end deftypemethod
+
+@deftypemethod jit_value void set_addressable ()
+@deftypemethodx jit_value int is_addressable () const
+Set or check the "addressable" state on this value.
+@end deftypemethod
+
+@deftypemethod jit_value jit_type_t type () const
+Get the type of this value.
+@end deftypemethod
+
+@deftypemethod jit_value jit_function_t function () const
+@deftypemethodx jit_value jit_block_t block () const
+@deftypemethodx jit_value jit_context_t context () const
+Get the owning function, block, or context for this value.
+@end deftypemethod
+
+@deftypemethod jit_value jit_constant_t constant () const
+@deftypemethodx jit_value jit_nint nint_constant () const
+@deftypemethodx jit_value jit_long long_constant () const
+@deftypemethodx jit_value jit_float32 float32_constant () const
+@deftypemethodx jit_value jit_float64 float64_constant () const
+@deftypemethodx jit_value jit_nfloat nfloat_constant () const
+Extract the constant stored in this value.
+@end deftypemethod
+
+@defop Operator jit_value {jit_value operator+} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator-} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator*} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator/} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator%} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator-} (const jit_value& @var{value1})
+@defopx Operator jit_value {jit_value operator&} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator|} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator^} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator~} (const jit_value& @var{value1})
+@defopx Operator jit_value {jit_value operator<<} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator>>} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator==} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator!=} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator<} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator<=} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator>} (const jit_value& @var{value1}, const jit_value& @var{value2})
+@defopx Operator jit_value {jit_value operator>=} (const jit_value& @var{value1}, const jit_value& @var{value2})
+Generate an arithmetic, bitwise, or comparison instruction based on
+one or two @code{jit_value} objects.  These operators are shortcuts
+for calling @code{insn_add}, @code{insn_sub}, etc on the
+@code{jit_function} object.
+@end defop
+
+

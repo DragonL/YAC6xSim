@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{C4312197-9A90-4AE3-BA68-EAD97E5845B4}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>intrinsics_gen</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include;C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\include\llvm\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -HC:/Yang/91__code/llvm-3.1/llvm-3.1.src -BC:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin --check-stamp-file C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/CMakeLists.txt;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CMakeLists.txt;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -HC:/Yang/91__code/llvm-3.1/llvm-3.1.src -BC:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin --check-stamp-file C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/CMakeLists.txt;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CMakeLists.txt;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -HC:/Yang/91__code/llvm-3.1/llvm-3.1.src -BC:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin --check-stamp-file C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/CMakeLists.txt;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CMakeLists.txt;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -HC:/Yang/91__code/llvm-3.1/llvm-3.1.src -BC:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin --check-stamp-file C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/CMakeLists.txt;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CMakeLists.txt;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\generate.stamp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\CMakeFiles\4950a572a8e68fea9c23c500bebd120b\Intrinsics.gen.tmp.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Intrinsics.gen...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+..\..\bin\Debug\llvm-tblgen.exe -gen-intrinsic -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/lib/Target -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/Intrinsics.td -o C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen.tmp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/4950a572a8e68fea9c23c500bebd120b/Intrinsics.gen.tmp.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\bin\Debug\llvm-tblgen.exe;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsARM.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsCellSPU.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsHexagon.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPowerPC.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPTX.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsX86.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsXCore.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CodeGen\ValueTypes.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsARM.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsCellSPU.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsHexagon.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPowerPC.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPTX.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsX86.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsXCore.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\Target.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetCallingConv.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetSchedule.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetSelectionDAG.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen.tmp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Intrinsics.gen...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+..\..\bin\Release\llvm-tblgen.exe -gen-intrinsic -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/lib/Target -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/Intrinsics.td -o C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen.tmp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/4950a572a8e68fea9c23c500bebd120b/Intrinsics.gen.tmp.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\bin\Release\llvm-tblgen.exe;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsARM.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsCellSPU.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsHexagon.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPowerPC.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPTX.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsX86.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsXCore.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CodeGen\ValueTypes.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsARM.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsCellSPU.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsHexagon.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPowerPC.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPTX.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsX86.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsXCore.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\Target.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetCallingConv.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetSchedule.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetSelectionDAG.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen.tmp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Intrinsics.gen...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+..\..\bin\MinSizeRel\llvm-tblgen.exe -gen-intrinsic -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/lib/Target -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/Intrinsics.td -o C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen.tmp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/4950a572a8e68fea9c23c500bebd120b/Intrinsics.gen.tmp.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\bin\MinSizeRel\llvm-tblgen.exe;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsARM.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsCellSPU.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsHexagon.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPowerPC.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPTX.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsX86.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsXCore.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CodeGen\ValueTypes.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsARM.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsCellSPU.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsHexagon.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPowerPC.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPTX.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsX86.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsXCore.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\Target.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetCallingConv.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetSchedule.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetSelectionDAG.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen.tmp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Intrinsics.gen...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+..\..\bin\RelWithDebInfo\llvm-tblgen.exe -gen-intrinsic -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/lib/Target -I C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/Intrinsics.td -o C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen.tmp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/4950a572a8e68fea9c23c500bebd120b/Intrinsics.gen.tmp.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\bin\RelWithDebInfo\llvm-tblgen.exe;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsARM.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsCellSPU.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsHexagon.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPowerPC.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPTX.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsX86.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsXCore.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\CodeGen\ValueTypes.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsARM.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsCellSPU.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsHexagon.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPowerPC.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsPTX.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsX86.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\IntrinsicsXCore.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\Target.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetCallingConv.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetSchedule.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Target\TargetSelectionDAG.td;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\include\llvm\Intrinsics.td;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen.tmp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\CMakeFiles\4950a572a8e68fea9c23c500bebd120b\Intrinsics.gen.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -E copy_if_different C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen.tmp C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/4950a572a8e68fea9c23c500bebd120b/Intrinsics.gen.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen.tmp;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -E copy_if_different C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen.tmp C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/4950a572a8e68fea9c23c500bebd120b/Intrinsics.gen.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen.tmp;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -E copy_if_different C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen.tmp C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/4950a572a8e68fea9c23c500bebd120b/Intrinsics.gen.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen.tmp;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -E copy_if_different C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen.tmp C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/include/llvm/Intrinsics.gen
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/4950a572a8e68fea9c23c500bebd120b/Intrinsics.gen.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen.tmp;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\CMakeFiles\83d7f91be640a20c1426416ba05495e8\intrinsics_gen.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/83d7f91be640a20c1426416ba05495e8/intrinsics_gen.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\intrinsics_gen</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/83d7f91be640a20c1426416ba05495e8/intrinsics_gen.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\intrinsics_gen</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/83d7f91be640a20c1426416ba05495e8/intrinsics_gen.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\intrinsics_gen</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/CMakeFiles/83d7f91be640a20c1426416ba05495e8/intrinsics_gen.rule;C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\Intrinsics.gen;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\intrinsics_gen</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CMakeFiles\intrinsics_gen" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/ZERO_CHECK.vcxproj">
+      <Project>A4E8C3FE-B578-4863-9729-882C8FC568F1</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Yang/91__code/llvm-3.1/llvm-3.1.src/bin/utils/TableGen/llvm-tblgen.vcxproj">
+      <Project>15839F6C-D567-42A1-9E07-7F9366AE5DFF</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

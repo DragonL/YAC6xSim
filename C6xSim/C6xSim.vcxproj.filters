@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{32613671-9b2a-4223-8cfb-a7592d1295b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\inc">
+      <UniqueIdentifier>{3454e337-b44e-44d7-851c-1ac88536b1e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\src">
+      <UniqueIdentifier>{3db3711e-fb9e-4e30-839e-90a544d8376b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="coff">
+      <UniqueIdentifier>{f926ff62-0cfd-40ba-9ab4-494fb2bfaa76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="coff\inc">
+      <UniqueIdentifier>{89a8a669-df14-4ea7-adf7-b0cc7a47ef6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="coff\src">
+      <UniqueIdentifier>{134fec07-e40e-4a1a-b594-a5cd1be58b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="decode">
+      <UniqueIdentifier>{d3bf6595-4ee7-4767-a934-2d32b9266de4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="decode\inc">
+      <UniqueIdentifier>{0869d7e0-aa77-4fbf-9421-0add6dcde2f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="decode\src">
+      <UniqueIdentifier>{aa3f41ec-4c0f-4d9f-b9fb-d5b3e9f9d2ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{3cb92d5d-3941-4e4b-b4e1-3d508961326d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\inc">
+      <UniqueIdentifier>{16420560-bab0-4665-bd87-00d36bae3516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\src">
+      <UniqueIdentifier>{67344f20-b535-4fb2-90e2-34a6bd48ff1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\verif">
+      <UniqueIdentifier>{faa695ae-1a6e-4394-8a47-acdf29159109}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="profile">
+      <UniqueIdentifier>{08f8951d-ebc0-4a2a-87ff-d0199915d6c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="profile\inc">
+      <UniqueIdentifier>{2c9e76fa-f9be-4a5d-8738-5f1a0139e023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="profile\src">
+      <UniqueIdentifier>{f0740278-cce6-458f-bdd7-9efd92abba9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jit">
+      <UniqueIdentifier>{4c651fb4-47ea-41c0-985f-dccc915737b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jit\inc">
+      <UniqueIdentifier>{00400149-a774-47cd-b953-5cefd5cf07e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jit\src">
+      <UniqueIdentifier>{ab47fa30-ef65-47b0-884b-e9367fba28e2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\inc\def.hpp">
+      <Filter>common\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\inc\endian.hpp">
+      <Filter>common\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\coff\inc\coff_def.hpp">
+      <Filter>coff\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\coff\inc\coff_parser.hpp">
+      <Filter>coff\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\coff\inc\dwarf_def.hpp">
+      <Filter>coff\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\decode\inc\ep.hpp">
+      <Filter>decode\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\decode\inc\fp.hpp">
+      <Filter>decode\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\decode\inc\inst.hpp">
+      <Filter>decode\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\core.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\ctrl_register.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\d_unit.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\dbg.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\l2_mem_ctrl.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\l_unit.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\m_unit.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\mem_block.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\n_unit.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\s_unit.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\timer_32bit.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\unit.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\profiler\inc\exe_path_profiler.hpp">
+      <Filter>profile\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\profiler\inc\execution_path.hpp">
+      <Filter>profile\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\inc\edma.hpp">
+      <Filter>core\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\profiler\inc\common_profiler.hpp">
+      <Filter>profile\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\jit\inc\jit.hpp">
+      <Filter>jit\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\profiler\inc\basic_block.hpp">
+      <Filter>profile\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\inc\st.h">
+      <Filter>common\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\jit\inc\jit_support.hpp">
+      <Filter>jit\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\inc\hw_timer.hpp">
+      <Filter>common\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\jit\inc\jit_thread.hpp">
+      <Filter>jit\inc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\src\def.cpp">
+      <Filter>common\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\src\test.cpp">
+      <Filter>common\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\coff\src\coff_def.cpp">
+      <Filter>coff\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\coff\src\coff_p.cpp">
+      <Filter>coff\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\coff\src\coff_parser.cpp">
+      <Filter>coff\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\coff\src\dwarf_def.cpp">
+      <Filter>coff\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\decode\src\ep.cpp">
+      <Filter>decode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\decode\src\fp.cpp">
+      <Filter>decode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\decode\src\inst.cpp">
+      <Filter>decode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\d_unit.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\dbg.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\l2_mem_ctrl.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\l_unit.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\m_unit.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\n_unit.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\s_unit.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\timer_32bit.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\unit.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\verif\test_m_unit.cpp">
+      <Filter>core\verif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\profiler\src\exe_path_profiler.cpp">
+      <Filter>profile\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\edma.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\test_s_unit.cpp">
+      <Filter>core\verif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\core\src\core.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\profiler\src\common_profiler.cpp">
+      <Filter>profile\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\jit\src\jit.cpp">
+      <Filter>jit\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\profiler\src\basic_block.cpp">
+      <Filter>profile\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\jit\src\jit_support.cpp">
+      <Filter>jit\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\src\hw_timer.cpp">
+      <Filter>common\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\jit\src\jit_thread.cpp">
+      <Filter>jit\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

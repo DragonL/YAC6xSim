@@ -1,0 +1,171 @@
+
+@c Extracted automatically from ../jit/jit-elf-read.c - DO NOT EDIT
+
+
+The @code{libjit} library contains routines that permit pre-compiling
+JIT'ed functions into an on-disk representation.  This representation
+can be loaded at some future time, to avoid the overhead of compiling
+the functions at runtime.
+
+We use the ELF format for this purpose, which is a common binary format
+used by modern operating systems and compilers.
+
+It isn't necessary for your operating system to be based on ELF natively.
+We use our own routines to read and write ELF binaries.  We chose ELF
+because it has all of the features that we require, and reusing an
+existing format was better than inventing a completely new one.
+
+@section Reading ELF binaries
+
+
+@deftypefun int jit_readelf_open (jit_readelf_t *@var{readelf}, const char *@var{filename}, int @var{force})
+Open the specified @var{filename} and load the ELF binary that is
+contained within it.  Returns one of the following result codes:
+
+@table @code
+@vindex JIT_READELF_OK
+@item JIT_READELF_OK
+The ELF binary was opened successfully.
+
+@vindex JIT_READELF_CANNOT_OPEN
+@item JIT_READELF_CANNOT_OPEN
+Could not open the file at the filesystem level (reason in @code{errno}).
+
+@vindex JIT_READELF_NOT_ELF
+@item JIT_READELF_NOT_ELF
+The file was opened, but it is not an ELF binary.
+
+@vindex JIT_READELF_WRONG_ARCH
+@item JIT_READELF_WRONG_ARCH
+The file is an ELF binary, but it does not pertain to the architecture
+of this machine.
+
+@vindex JIT_READELF_BAD_FORMAT
+@item JIT_READELF_BAD_FORMAT
+The file is an ELF binary, but the format is corrupted in some fashion.
+
+@vindex JIT_READELF_MEMORY
+@item JIT_READELF_MEMORY
+There is insufficient memory to open the ELF binary.
+@end table
+
+The following flags may be supplied to alter the manner in which
+the ELF binary is loaded:
+
+@table @code
+@vindex JIT_READELF_FLAG_FORCE
+@item JIT_READELF_FLAG_FORCE
+Force @code{jit_readelf_open} to open the ELF binary, even if
+the architecture does not match this machine.  Useful for debugging.
+
+@vindex JIT_READELF_FLAG_DEBUG
+@item JIT_READELF_FLAG_DEBUG
+Print additional debug information to stdout.
+@end table
+@end deftypefun
+
+@deftypefun void jit_readelf_close (jit_readelf_t @var{readelf})
+Close an ELF reader, reclaiming all of the memory that was used.
+@end deftypefun
+
+@deftypefun {const char *} jit_readelf_get_name (jit_readelf_t @var{readelf})
+Get the library name that is embedded inside an ELF binary.
+ELF binaries can refer to each other using this name.
+@end deftypefun
+
+@deftypefun void *jit_readelf_get_symbol (jit_readelf_t @var{readelf}, const char *@var{name})
+Look up the symbol called @var{name} in the ELF binary represented
+by @var{readelf}.  Returns NULL if the symbol is not present.
+
+External references from this ELF binary to others are not resolved
+until the ELF binary is loaded into a JIT context using
+@code{jit_readelf_add_to_context} and @code{jit_readelf_resolve_all}.
+You should not call functions within this ELF binary until after you
+have fully resolved it.
+@end deftypefun
+
+@deftypefun {void *} jit_readelf_get_section (jit_readelf_t @var{readelf}, const char *@var{name}, jit_nuint *@var{size})
+Get the address and size of a particular section from an ELF binary.
+Returns NULL if the section is not present in the ELF binary.
+
+The virtual machine may have stored auxillary information
+in the section when the binary was first generated.  This function
+allows the virtual machine to retrieve its auxillary information.
+
+Examples of such information may be version numbers, timestamps,
+checksums, and other identifying information for the bytecode that
+was previously compiled by the virtual machine.  The virtual machine
+can use this to determine if the ELF binary is up to date and
+relevant to its needs.
+
+It is recommended that virtual machines prefix their special sections
+with a unique string (e.g. @code{.foovm}) to prevent clashes with
+system-defined section names.  The prefix @code{.libjit} is reserved
+for use by @code{libjit} itself.
+@end deftypefun
+
+@deftypefun {void *} jit_readelf_get_section_by_type (jit_readelf_t @var{readelf}, jit_int @var{type}, jit_nuint *@var{size})
+Get a particular section using its raw ELF section type (i.e. one of
+the @code{SHT_*} constants in @code{jit-elf-defs.h}).  This is mostly
+for internal use, but some virtual machines may find it useful for
+debugging purposes.
+@end deftypefun
+
+@deftypefun {void *} jit_readelf_map_vaddr (jit_readelf_t @var{readelf}, jit_nuint @var{vaddr})
+Map a virtual address to an actual address in a loaded ELF binary.
+Returns NULL if @var{vaddr} could not be mapped.
+@end deftypefun
+
+@deftypefun {unsigned int} jit_readelf_num_needed (jit_readelf_t @var{readelf})
+Get the number of dependent libraries that are needed by this
+ELF binary.  The virtual machine will normally need to arrange
+to load these libraries with @code{jit_readelf_open} as well,
+so that all of the necessary symbols can be resolved.
+@end deftypefun
+
+@deftypefun {const char *} jit_readelf_get_needed (jit_readelf_t @var{readelf}, unsigned int @var{index})
+Get the name of the dependent library at position @var{index} within
+the needed libraries list of this ELF binary.  Returns NULL if
+the @var{index} is invalid.
+@end deftypefun
+
+@deftypefun void jit_readelf_add_to_context (jit_readelf_t @var{readelf}, jit_context_t @var{context})
+Add this ELF binary to a JIT context, so that its contents can be used
+when executing JIT-managed code.  The binary will be closed automatically
+if the context is destroyed and @code{jit_readelf_close} has not been
+called explicitly yet.
+
+The functions in the ELF binary cannot be used until you also call
+@code{jit_readelf_resolve_all} to resolve cross-library symbol references.
+The reason why adding and resolution are separate steps is to allow for
+resolving circular dependencies between ELF binaries.
+@end deftypefun
+
+@deftypefun int jit_readelf_resolve_all (jit_context_t @var{context}, int @var{print_failures})
+Resolve all of the cross-library symbol references in ELF binaries
+that have been added to @var{context} but which were not resolved
+in the previous call to this function.  If @var{print_failures}
+is non-zero, then diagnostic messages will be written to stdout
+for any symbol resolutions that fail.
+
+Returns zero on failure, or non-zero if all symbols were successfully
+resolved.  If there are no ELF binaries awaiting resolution, then
+this function will return a non-zero result.
+@end deftypefun
+
+@deftypefun int jit_readelf_register_symbol (jit_context_t @var{context}, const char *@var{name}, void *@var{value}, int @var{after})
+Register @var{value} with @var{name} on the specified @var{context}.
+Whenever symbols are resolved with @code{jit_readelf_resolve_all},
+and the symbol @var{name} is encountered, @var{value} will be
+substituted.  Returns zero if out of memory or there is something
+wrong with the parameters.
+
+If @var{after} is non-zero, then @var{name} will be resolved after all
+other ELF libraries; otherwise it will be resolved before the ELF
+libraries.
+
+This function is used to register intrinsic symbols that are specific to
+the front end virtual machine.  References to intrinsics within
+@code{libjit} itself are resolved automatically.
+@end deftypefun
+

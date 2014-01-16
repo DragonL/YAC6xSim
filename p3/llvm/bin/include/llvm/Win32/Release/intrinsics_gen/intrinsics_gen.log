@@ -1,0 +1,11 @@
+﻿生成启动时间为 2012/11/3 22:25:04。
+     1>项目“C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\intrinsics_gen.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>CustomBuild:
+         Building Custom Rule C:/Yang/91__code/llvm-3.1/llvm-3.1.src/include/llvm/CMakeLists.txt
+         CMake does not need to re-run because C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\CMakeFiles\generate.stamp is up-to-date.
+         Building Intrinsics.gen...
+     1>已完成生成项目“C:\Yang\91__code\llvm-3.1\llvm-3.1.src\bin\include\llvm\intrinsics_gen.vcxproj”(Rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.32

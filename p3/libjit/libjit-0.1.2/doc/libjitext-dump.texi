@@ -1,0 +1,31 @@
+
+@c Extracted automatically from ../jit/jit-dump.c - DO NOT EDIT
+
+
+@cindex jit-dump.h
+
+
+@deftypefun void jit_dump_type (FILE *@var{stream}, jit_type_t @var{type})
+Dump the name of a type to a stdio stream.
+@end deftypefun
+
+@deftypefun void jit_dump_value (FILE *@var{stream}, jit_function_t @var{func}, jit_value_t @var{value}, const char *@var{prefix})
+Dump the name of a value to a stdio stream.  If @var{prefix} is not
+NULL, then it indicates a type prefix to add to the value name.
+If @var{prefix} is NULL, then this function intuits the type prefix.
+@end deftypefun
+
+@deftypefun void jit_dump_insn (FILE *@var{stream}, jit_function_t @var{func}, jit_value_t @var{value})
+Dump the contents of an instruction to a stdio stream.
+@end deftypefun
+
+@deftypefun void jit_dump_function (FILE *@var{stream}, jit_function_t @var{func}, const char *@var{name})
+Dump the three-address instructions within a function to a stream.
+The @var{name} is attached to the output as a friendly label, but
+has no other significance.
+
+If the function has not been compiled yet, then this will dump the
+three address instructions from the build process.  Otherwise it will
+disassemble and dump the compiled native code.
+@end deftypefun
+

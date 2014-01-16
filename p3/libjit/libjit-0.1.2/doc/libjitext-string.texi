@@ -1,0 +1,87 @@
+
+@c Extracted automatically from ../jit/jit-string.c - DO NOT EDIT
+
+@section String operations
+@cindex String operations
+
+The following functions are provided to manipulate NULL-terminated
+strings.  It is highly recommended that you use these functions in
+preference to system functions, because the corresponding system
+functions are extremely non-portable.
+
+@deftypefun {unsigned int} jit_strlen (const char *@var{str})
+Returns the length of @var{str}.
+@end deftypefun
+
+@deftypefun {char *} jit_strcpy (char *@var{dest}, const char *@var{src})
+Copy the string at @var{src} to @var{dest}.  Returns @var{dest}.
+@end deftypefun
+
+@deftypefun {char *} jit_strcat (char *@var{dest}, const char *@var{src})
+Copy the string at @var{src} to the end of the string at @var{dest}.
+Returns @var{dest}.
+@end deftypefun
+
+@deftypefun {char *} jit_strncpy (char *@var{dest}, const char *@var{src}, unsigned int @var{len})
+Copy at most @var{len} characters from the string at @var{src} to
+@var{dest}.  Returns @var{dest}.
+@end deftypefun
+
+@deftypefun {char *} jit_strdup (const char *@var{str})
+Allocate a block of memory using @code{jit_malloc} and copy
+@var{str} into it.  Returns NULL if @var{str} is NULL or there
+is insufficient memory to perform the @code{jit_malloc} operation.
+@end deftypefun
+
+@deftypefun {char *} jit_strndup (const char *@var{str}, unsigned int @var{len})
+Allocate a block of memory using @code{jit_malloc} and copy at most
+@var{len} characters of @var{str} into it.  The copied string is then
+NULL-terminated.  Returns NULL if @var{str} is NULL or there
+is insufficient memory to perform the @code{jit_malloc} operation.
+@end deftypefun
+
+@deftypefun int jit_strcmp (const char *@var{str1}, const char *@var{str2})
+Compare the two strings @var{str1} and @var{str2}, returning
+a negative, zero, or positive value depending upon their relationship.
+@end deftypefun
+
+@deftypefun int jit_strncmp (const char *@var{str1}, const char *@var{str2}, unsigned int @var{len})
+Compare the two strings @var{str1} and @var{str2}, returning
+a negative, zero, or positive value depending upon their relationship.
+At most @var{len} characters are compared.
+@end deftypefun
+
+@deftypefun int jit_stricmp (const char *@var{str1}, const char *@var{str2})
+Compare the two strings @var{str1} and @var{str2}, returning
+a negative, zero, or positive value depending upon their relationship.
+Instances of the English letters A to Z are converted into their
+lower case counterparts before comparison.
+
+Note: this function is guaranteed to use English case comparison rules,
+no matter what the current locale is set to, making it suitable for
+comparing token tags and simple programming language identifiers.
+
+Locale-sensitive string comparison is complicated and usually specific
+to the front end language or its supporting runtime library.  We
+deliberately chose not to handle this in @code{libjit}.
+@end deftypefun
+
+@deftypefun int jit_strnicmp (const char *@var{str1}, const char *@var{str2}, unsigned int @var{len})
+Compare the two strings @var{str1} and @var{str2}, returning
+a negative, zero, or positive value depending upon their relationship.
+At most @var{len} characters are compared.  Instances of the English
+letters A to Z are converted into their lower case counterparts
+before comparison.
+@end deftypefun
+
+@deftypefun {char *} jit_strchr (const char *@var{str}, int @var{ch})
+Search @var{str} for the first occurrence of @var{ch}.  Returns
+the address where @var{ch} was found, or NULL if not found.
+@end deftypefun
+
+@deftypefun {char *} jit_strrchr (const char *@var{str}, int @var{ch})
+Search @var{str} for the first occurrence of @var{ch}, starting
+at the end of the string.  Returns the address where @var{ch}
+was found, or NULL if not found.
+@end deftypefun
+

@@ -1,0 +1,38 @@
+
+@c Extracted automatically from ../jit/jit-memory.c - DO NOT EDIT
+
+@section Memory set, copy, compare, etc
+@cindex Memory operations
+
+The following functions are provided to set, copy, compare, and search
+memory blocks.
+
+@deftypefun {void *} jit_memset (void *@var{dest}, int @var{ch}, unsigned int @var{len})
+Set the @var{len} bytes at @var{dest} to the value @var{ch}.
+Returns @var{dest}.
+@end deftypefun
+
+@deftypefun {void *} jit_memcpy (void *@var{dest}, const void *@var{src}, unsigned int @var{len})
+Copy the @var{len} bytes at @var{src} to @var{dest}.  Returns
+@var{dest}.  The behavior is undefined if the blocks overlap
+(use @var{jit_memmove} instead for that case).
+@end deftypefun
+
+@deftypefun {void *} jit_memmove (void *@var{dest}, const void *@var{src}, unsigned int @var{len})
+Copy the @var{len} bytes at @var{src} to @var{dest} and handle
+overlapping blocks correctly.  Returns @var{dest}.
+@end deftypefun
+
+@deftypefun int jit_memcmp (const void *@var{s1}, const void *@var{s2}, unsigned int @var{len})
+Compare @var{len} bytes at @var{s1} and @var{s2}, returning a negative,
+zero, or positive result depending upon their relationship.  It is
+system-specific as to whether this function uses signed or unsigned
+byte comparisons.
+@end deftypefun
+
+@deftypefun {void *} jit_memchr (void *@var{str}, int @var{ch}, unsigned int @var{len})
+Search the @var{len} bytes at @var{str} for the first instance of
+the value @var{ch}.  Returns the location of @var{ch} if it was found,
+or NULL if it was not found.
+@end deftypefun
+

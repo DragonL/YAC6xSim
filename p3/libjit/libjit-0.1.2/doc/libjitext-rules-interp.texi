@@ -1,0 +1,361 @@
+
+@c Extracted automatically from ../jit/jit-rules-interp.c - DO NOT EDIT
+
+
+The architecture definition rules for a CPU are placed into the files
+@code{jit-rules-ARCH.h} and @code{jit-rules-ARCH.c}.  You should add
+both of these files to @code{Makefile.am} in @code{libjit/jit}.
+
+You will also need to edit @code{jit-rules.h} in two places.  First,
+place detection logic at the top of the file to detect your platform
+and define @code{JIT_BACKEND_ARCH} to 1.  Further down the file,
+you should add the following two lines to the include file logic:
+
+@example
+#elif defined(JIT_BACKEND_ARCH)
+#include "jit-rules-ARCH.h"
+@end example
+
+@subsection Defining the registers
+
+Every rule header file needs to define the macro @code{JIT_REG_INFO} to
+an array of values that represents the properties of the CPU's
+registers.  The @code{_jit_reg_info} array is populated with
+these values.  @code{JIT_NUM_REGS} defines the number of
+elements in the array.  Each element in the array has the
+following members:
+
+@table @code
+@item name
+The name of the register.  This is used for debugging purposes.
+
+@item cpu_reg
+The raw CPU register number.  Registers in @code{libjit} are
+referred to by their pseudo register numbers, corresponding to
+their index within @code{JIT_REG_INFO}.  However, these pseudo
+register numbers may not necessarily correspond to the register
+numbers used by the actual CPU.  This field provides a mapping.
+
+@item other_reg
+The second pseudo register in a 64-bit register pair, or -1 if
+the current register cannot be used as the first pseudo register
+in a 64-bit register pair.  This field only has meaning on 32-bit
+platforms, and should always be set to -1 on 64-bit platforms.
+
+@item flags
+Flag bits that describe the pseudo register's properties.
+@end table
+
+@noindent
+The following flags may be present:
+
+@table @code
+@item JIT_REG_WORD
+This register can hold an integer word value.
+
+@item JIT_REG_LONG
+This register can hold a 64-bit long value without needing a
+second register.  Normally only used on 64-bit platforms.
+
+@item JIT_REG_FLOAT32
+This register can hold a 32-bit floating-point value.
+
+@item JIT_REG_FLOAT64
+This register can hold a 64-bit floating-point value.
+
+@item JIT_REG_NFLOAT
+This register can hold a native floating-point value.
+
+@item JIT_REG_FRAME
+This register holds the frame pointer.  You will almost always supply
+@code{JIT_REG_FIXED} for this register.
+
+@item JIT_REG_STACK_PTR
+This register holds the stack pointer.  You will almost always supply
+@code{JIT_REG_FIXED} for this register.
+
+@item JIT_REG_FIXED
+This register has a fixed meaning and cannot be used for general allocation.
+
+@item JIT_REG_CALL_USED
+This register will be destroyed by a function call.
+
+@item JIT_REG_IN_STACK
+This register is in a stack-like arrangement.
+
+@item JIT_REG_GLOBAL
+This register is a candidate for global register allocation.
+@end table
+
+A CPU may have some registers arranged into a stack.  In this case
+operations can typically only occur at the top of the stack, and
+may automatically pop values as a side-effect of the operation.
+An example of such architecture is x87 floating point unit.  Such
+CPU requires three additional macros.
+
+@table @code
+
+@item JIT_REG_STACK
+If defined, this indicates the presence of the register stack.
+
+@item JIT_REG_STACK_START
+The index of the first register in the @code{JIT_REG_INFO} array that is used
+in a stack-like arrangement.
+
+@item JIT_REG_STACK_END
+The index of the last register in the @code{JIT_REG_INFO} array that is used
+in a stack-like arrangement.
+
+@end table
+
+The entries in the @code{JIT_REG_INFO} array from @code{JIT_REG_STACK_START}
+up to @code{JIT_REG_STACK_END} must also have the @code{JIT_REG_IN_STACK}
+flag set.
+
+@subsection Other architecture macros
+
+@noindent
+The rule file may also have definitions of the following macros:
+
+@table @code
+@item JIT_NUM_GLOBAL_REGS
+The number of registers that are used for global register allocation.
+Set to zero if global register allocation should not be used.
+
+@item JIT_ALWAYS_REG_REG
+Define this to 1 if arithmetic operations must always be performed
+on registers.  Define this to 0 if register/memory and memory/register
+operations are possible.
+
+@item JIT_PROLOG_SIZE
+If defined, this indicates the maximum size of the function prolog.
+
+@item JIT_FUNCTION_ALIGNMENT
+This value indicates the alignment required for the start of a function.
+e.g. define this to 32 if functions should be aligned on a 32-byte
+boundary.
+
+@item JIT_ALIGN_OVERRIDES
+Define this to 1 if the platform allows reads and writes on
+any byte boundary.  Define to 0 if only properly-aligned
+memory accesses are allowed.  Normally only defined to 1 under x86.
+
+@item jit_extra_gen_state
+@itemx jit_extra_gen_init
+@itemx jit_extra_gen_cleanup
+The @code{jit_extra_gen_state} macro can be supplied to add extra fields
+to the @code{struct jit_gencode} type in @code{jit-rules.h}, for
+extra CPU-specific code generation state information.
+
+The @code{jit_extra_gen_init} macro initializes this extra information,
+and the @code{jit_extra_gen_cleanup} macro cleans it up when code
+generation is complete.
+@end table
+
+@subsection Architecture-dependent functions
+
+
+@deftypefun void _jit_init_backend (void)
+Initialize the backend.  This is normally used to configure registers
+that may not appear on all CPU's in a given family.  For example, only
+some ARM cores have floating-point registers.
+@end deftypefun
+
+@deftypefun void _jit_gen_get_elf_info (jit_elf_info_t *@var{info})
+Get the ELF machine and ABI type information for this platform.
+The @code{machine} field should be set to one of the @code{EM_*}
+values in @code{jit-elf-defs.h}.  The @code{abi} field should
+be set to one of the @code{ELFOSABI_*} values in @code{jit-elf-defs.h}
+(@code{ELFOSABI_SYSV} will normally suffice if you are unsure).
+The @code{abi_version} field should be set to the ABI version,
+which is usually zero.
+@end deftypefun
+
+@deftypefun int _jit_create_entry_insns (jit_function_t @var{func})
+Create instructions in the entry block to initialize the
+registers and frame offsets that contain the parameters.
+Returns zero if out of memory.
+
+This function is called when a builder is initialized.  It should
+scan the signature and decide which register or frame position
+contains each of the parameters and then call either
+@code{jit_insn_incoming_reg} or @code{jit_insn_incoming_frame_posn}
+to notify @code{libjit} of the location.
+@end deftypefun
+
+@deftypefun int _jit_create_call_setup_insns (jit_function_t @var{func}, jit_type_t @var{signature}, jit_value_t *@var{args}, unsigned int @var{num_args}, int @var{is_nested}, int @var{nested_level}, jit_value_t *@var{struct_return}, int @var{flags})
+Create instructions within @var{func} necessary to set up for a
+function call to a function with the specified @var{signature}.
+Use @code{jit_insn_push} to push values onto the system stack,
+or @code{jit_insn_outgoing_reg} to copy values into call registers.
+
+If @var{is_nested} is non-zero, then it indicates that we are calling a
+nested function within the current function's nested relationship tree.
+The @var{nested_level} value will be -1 to call a child, zero to call a
+sibling of @var{func}, 1 to call a sibling of the parent, 2 to call
+a sibling of the grandparent, etc.  The @code{jit_insn_setup_for_nested}
+instruction should be used to create the nested function setup code.
+
+If the function returns a structure by pointer, then @var{struct_return}
+must be set to a new local variable that will contain the returned
+structure.  Otherwise it should be set to NULL.
+@end deftypefun
+
+@deftypefun int _jit_setup_indirect_pointer (jit_function_t @var{func}, jit_value_t @var{value})
+Place the indirect function pointer @var{value} into a suitable register
+or stack location for a subsequent indirect call.
+@end deftypefun
+
+@deftypefun int _jit_create_call_return_insns (jit_function_t @var{func}, jit_type_t @var{signature}, jit_value_t *@var{args}, unsigned int @var{num_args}, jit_value_t @var{return_value}, int @var{is_nested})
+Create instructions within @var{func} to clean up after a function call
+and to place the function's result into @var{return_value}.
+This should use @code{jit_insn_pop_stack} to pop values off the system
+stack and @code{jit_insn_return_reg} to tell @code{libjit} which
+register contains the return value.  In the case of a @code{void}
+function, @var{return_value} will be NULL.
+
+Note: the argument values are passed again because it may not be possible
+to determine how many bytes to pop from the stack from the @var{signature}
+alone; especially if the called function is vararg.
+@end deftypefun
+
+@deftypefun int _jit_opcode_is_supported (int @var{opcode})
+Not all CPU's support all arithmetic, conversion, bitwise, or
+comparison operators natively.  For example, most ARM platforms
+need to call out to helper functions to perform floating-point.
+
+If this function returns zero, then @code{jit-insn.c} will output a
+call to an intrinsic function that is equivalent to the desired opcode.
+This is how you tell @code{libjit} that you cannot handle the
+opcode natively.
+
+This function can also help you develop your back end incrementally.
+Initially, you can report that only integer operations are supported,
+and then once you have them working you can move on to the floating point
+operations.
+@end deftypefun
+
+@deftypefun {void *} _jit_gen_prolog (jit_gencode_t @var{gen}, jit_function_t @var{func}, void *@var{buf})
+Generate the prolog for a function into a previously-prepared
+buffer area of @code{JIT_PROLOG_SIZE} bytes in size.  Returns
+the start of the prolog, which may be different than @var{buf}.
+
+This function is called at the end of the code generation process,
+not the beginning.  At this point, it is known which callee save
+registers must be preserved, allowing the back end to output the
+most compact prolog possible.
+@end deftypefun
+
+@deftypefun void _jit_gen_epilog (jit_gencode_t @var{gen}, jit_function_t @var{func})
+Generate a function epilog, restoring the registers that
+were saved on entry to the function, and then returning.
+
+Only one epilog is generated per function.  Functions with multiple
+@code{jit_insn_return} instructions will all jump to the common epilog.
+This is needed because the code generator may not know which callee
+save registers need to be restored by the epilog until the full function
+has been processed.
+@end deftypefun
+
+@deftypefun {void *} _jit_gen_redirector (jit_gencode_t @var{gen}, jit_function_t @var{func})
+Generate code for a redirector, which makes an indirect jump
+to the contents of @code{@var{func}->entry_point}.  Redirectors
+are used on recompilable functions in place of the regular
+entry point.  This allows @code{libjit} to redirect existing
+calls to the new version after recompilation.
+@end deftypefun
+
+@deftypefun void _jit_gen_spill_reg (jit_gencode_t @var{gen}, int @var{reg}, int @var{other_reg}, jit_value_t @var{value})
+Generate instructions to spill a pseudo register to the local
+variable frame.  If @var{other_reg} is not -1, then it indicates
+the second register in a 64-bit register pair.
+
+This function will typically call @code{_jit_gen_fix_value} to
+fix the value's frame position, and will then generate the
+appropriate spill instructions.
+@end deftypefun
+
+@deftypefun void _jit_gen_free_reg (jit_gencode_t @var{gen}, int @var{reg}, int @var{other_reg}, int @var{value_used})
+Generate instructions to free a register without spilling its value.
+This is called when a register's contents become invalid, or its
+value is no longer required.  If @var{value_used} is set to a non-zero
+value, then it indicates that the register's value was just used.
+Otherwise, there is a value in the register but it was never used.
+
+On most platforms, this function won't need to do anything to free
+the register.  But some do need to take explicit action.  For example,
+x86 needs an explicit instruction to remove a floating-point value
+from the FPU's stack if its value has not been used yet.
+@end deftypefun
+
+@deftypefun void _jit_gen_load_value (jit_gencode_t @var{gen}, int @var{reg}, int @var{other_reg}, jit_value_t @var{value})
+Generate instructions to load a value into a register.  The value will
+either be a constant or a slot in the frame.  You should fix frame slots
+with @code{_jit_gen_fix_value}.
+@end deftypefun
+
+@deftypefun void _jit_gen_spill_global (jit_gencode_t @var{gen}, int @var{reg}, jit_value_t @var{value})
+Spill the contents of @var{value} from its corresponding global register.
+This is used in rare cases when a machine instruction requires its operand
+to be in the specific register that happens to be global. In such cases the
+register is spilled just before the instruction and loaded back immediately
+after it.
+@end deftypefun
+
+@deftypefun void _jit_gen_load_global (jit_gencode_t @var{gen}, int @var{reg}, jit_value_t @var{value})
+Load the contents of @var{value} into its corresponding global register.
+This is used at the head of a function to pull parameters out of stack
+slots into their global register copies.
+@end deftypefun
+
+@deftypefun void _jit_gen_exch_top (jit_gencode_t @var{gen}, int @var{reg})
+Generate instructions to exchange the contents of the top stack register
+with a stack register specified by the @var{reg} argument.
+
+It needs to be implemented only by backends that support stack registers.
+@end deftypefun
+
+@deftypefun void _jit_gen_move_top (jit_gencode_t @var{gen}, int @var{reg})
+Generate instructions to copy the contents of the top stack register
+into a stack register specified by the @code{reg} argument and pop
+the top register after this. If @code{reg} is equal to the top register
+then the top register is just popped without copying it.
+
+It needs to be implemented only by backends that support stack registers.
+@end deftypefun
+
+@deftypefun void _jit_gen_spill_top (jit_gencode_t @var{gen}, int @var{reg}, jit_value_t @var{value}, int @var{pop})
+Generate instructions to spill the top stack register to the local
+variable frame. The @var{pop} argument indicates if the top register
+is popped from the stack.
+
+It needs to be implemented only by backends that support stack registers.
+@end deftypefun
+
+@deftypefun void _jit_gen_fix_value (jit_value_t @var{value})
+Fix the position of a value within the local variable frame.
+If it doesn't already have a position, then assign one for it.
+@end deftypefun
+
+@deftypefun void _jit_gen_insn (jit_gencode_t @var{gen}, jit_function_t @var{func}, jit_block_t @var{block}, jit_insn_t @var{insn})
+Generate native code for the specified @var{insn}.  This function should
+call the appropriate register allocation routines, output the instruction,
+and then arrange for the result to be placed in an appropriate register
+or memory destination.
+@end deftypefun
+
+@deftypefun void _jit_gen_start_block (jit_gencode_t @var{gen}, jit_block_t @var{block})
+Called to notify the back end that the start of a basic block
+has been reached.
+@end deftypefun
+
+@deftypefun void _jit_gen_end_block (jit_gencode_t @var{gen})
+Called to notify the back end that the end of a basic block
+has been reached.
+@end deftypefun
+
+@deftypefun int _jit_gen_is_global_candidate (jit_type_t @var{type})
+Determine if @var{type} is a candidate for allocation within
+global registers.
+@end deftypefun
+

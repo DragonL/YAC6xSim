@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\include\llvm\CMakeLists.txt" />
+    <CustomBuild Include="..\..\CMakeFiles\4950a572a8e68fea9c23c500bebd120b\Intrinsics.gen.tmp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\CMakeFiles\4950a572a8e68fea9c23c500bebd120b\Intrinsics.gen.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\CMakeFiles\83d7f91be640a20c1426416ba05495e8\intrinsics_gen.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CMakeFiles\intrinsics_gen" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{7A60F71B-E7E6-453E-8C51-612FCAA2C5ED}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

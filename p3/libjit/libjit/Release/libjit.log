@@ -1,0 +1,92 @@
+﻿生成启动时间为 2012/11/23 0:21:06。
+     1>项目“I:\code\199__YACSixxS\p3\libjit\libjit\libjit.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>ClCompile:
+         D:\Program Files\Intel\Composer XE 2013\bin\ia32\icl.exe /c /Qvc11 /Qlocation,link,"$(VCInstallDir)\bin" /I"../libjit-0.1.2/jit" /I"../libjit-0.1.2/include" /Zi /nologo /W0 /O3 /Ob1 /Oi /Ot /Oy /GT /Qipo /Qftz- /D __INTEL_COMPILER=1300 /D WIN32 /D NDEBUG /D _CONSOLE /EHsc /MT /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TC "..\libjit-0.1.2\jit\jit-alloc.c" "..\libjit-0.1.2\jit\jit-apply-x86.c" "..\libjit-0.1.2\jit\jit-apply.c" "..\libjit-0.1.2\jit\jit-bitset.c" "..\libjit-0.1.2\jit\jit-block.c" "..\libjit-0.1.2\jit\jit-cache.c" "..\libjit-0.1.2\jit\jit-cfg.c" "..\libjit-0.1.2\jit\jit-context.c" "..\libjit-0.1.2\jit\jit-cpuid-x86.c" "..\libjit-0.1.2\jit\jit-debugger.c" "..\libjit-0.1.2\jit\jit-dump.c" "..\libjit-0.1.2\jit\jit-elf-write.c" "..\libjit-0.1.2\jit\jit-except.c" "..\libjit-0.1.2\jit\jit-function.c" "..\libjit-0.1.2\jit\jit-gen-arm.c" "..\libjit-0.1.2\jit\jit-init.c" "..\libjit-0.1.2\jit\jit-insn.c" "..\libjit-0.1.2\jit\jit-interp.c" "..\libjit-0.1.2\jit\jit-intrinsic.c" "..\libjit-0.1.2\jit\jit-live.c" "..\libjit-0.1.2\jit\jit-memory.c" "..\libjit-0.1.2\jit\jit-meta.c" "..\libjit-0.1.2\jit\jit-objmodel.c" "..\libjit-0.1.2\jit\jit-opcode.c" "..\libjit-0.1.2\jit\jit-pool.c" "..\libjit-0.1.2\jit\jit-reg-alloc.c" "..\libjit-0.1.2\jit\jit-reg-class.c" "..\libjit-0.1.2\jit\jit-rules-interp.c" "..\libjit-0.1.2\jit\jit-rules-x86.c" "..\libjit-0.1.2\jit\jit-rules.c" "..\libjit-0.1.2\jit\jit-signal.c" "..\libjit-0.1.2\jit\jit-string.c" "..\libjit-0.1.2\jit\jit-symbol.c" "..\libjit-0.1.2\jit\jit-thread.c" "..\libjit-0.1.2\jit\jit-type.c" "..\libjit-0.1.2\jit\jit-unwind.c" "..\libjit-0.1.2\jit\jit-value.c" "..\libjit-0.1.2\jit\jit-walk.c"
+         jit-alloc.c
+         jit-apply-x86.c
+         jit-apply.c
+         jit-bitset.c
+         jit-block.c
+         jit-cache.c
+         jit-cfg.c
+         jit-context.c
+         jit-cpuid-x86.c
+         jit-debugger.c
+         jit-dump.c
+         jit-elf-write.c
+         jit-except.c
+         jit-function.c
+         jit-gen-arm.c
+         jit-init.c
+         jit-insn.c
+         jit-interp.c
+         jit-intrinsic.c
+         jit-live.c
+         jit-memory.c
+         jit-meta.c
+         jit-objmodel.c
+         jit-opcode.c
+         jit-pool.c
+         jit-reg-alloc.c
+         jit-reg-class.c
+         jit-rules-interp.c
+         jit-rules-x86.c
+         jit-rules.c
+         jit-signal.c
+         jit-string.c
+         jit-symbol.c
+         jit-thread.c
+         jit-type.c
+         jit-unwind.c
+         jit-value.c
+         jit-walk.c
+       Lib:
+         D:\Program Files\Intel\Composer XE 2013\bin\ia32\xilib.exe /OUT:"I:\code\199__YACSixxS\p3\libjit\libjit\Release\libjit.lib" /NOLOGO "Release\jit-alloc.obj"
+         "Release\jit-apply-x86.obj"
+         "Release\jit-apply.obj"
+         "Release\jit-bitset.obj"
+         "Release\jit-block.obj"
+         "Release\jit-cache.obj"
+         "Release\jit-cfg.obj"
+         "Release\jit-context.obj"
+         "Release\jit-cpuid-x86.obj"
+         "Release\jit-debugger.obj"
+         "Release\jit-dump.obj"
+         "Release\jit-elf-write.obj"
+         "Release\jit-except.obj"
+         "Release\jit-function.obj"
+         "Release\jit-gen-arm.obj"
+         "Release\jit-init.obj"
+         "Release\jit-insn.obj"
+         "Release\jit-interp.obj"
+         "Release\jit-intrinsic.obj"
+         "Release\jit-live.obj"
+         "Release\jit-memory.obj"
+         "Release\jit-meta.obj"
+         "Release\jit-objmodel.obj"
+         "Release\jit-opcode.obj"
+         "Release\jit-pool.obj"
+         "Release\jit-reg-alloc.obj"
+         "Release\jit-reg-class.obj"
+         "Release\jit-rules-interp.obj"
+         "Release\jit-rules-x86.obj"
+         "Release\jit-rules.obj"
+         "Release\jit-signal.obj"
+         "Release\jit-string.obj"
+         "Release\jit-symbol.obj"
+         "Release\jit-thread.obj"
+         "Release\jit-type.obj"
+         "Release\jit-unwind.obj"
+         "Release\jit-value.obj"
+         "Release\jit-walk.obj"
+         xilib: executing 'lib'
+     1>jit-signal.obj : warning LNK4221: 此对象文件未定义任何之前未定义的公共符号，因此任何耗用此库的链接操作都不会使用此文件
+     1>jit-rules-interp.obj : warning LNK4221: 此对象文件未定义任何之前未定义的公共符号，因此任何耗用此库的链接操作都不会使用此文件
+     1>jit-interp.obj : warning LNK4221: 此对象文件未定义任何之前未定义的公共符号，因此任何耗用此库的链接操作都不会使用此文件
+     1>jit-gen-arm.obj : warning LNK4221: 此对象文件未定义任何之前未定义的公共符号，因此任何耗用此库的链接操作都不会使用此文件
+         libjit.vcxproj -> I:\code\199__YACSixxS\p3\libjit\libjit\Release\libjit.lib
+     1>已完成生成项目“I:\code\199__YACSixxS\p3\libjit\libjit\libjit.vcxproj”(Rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:01:07.01

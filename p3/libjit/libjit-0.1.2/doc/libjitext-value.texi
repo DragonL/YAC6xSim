@@ -1,0 +1,341 @@
+
+@c Extracted automatically from ../jit/jit-value.c - DO NOT EDIT
+
+
+@cindex jit-value.h
+
+Values form the backbone of the storage system in @code{libjit}.
+Every value in the system, be it a constant, a local variable,
+or a temporary result, is represented by an object of type
+@code{jit_value_t}.  The JIT then allocates registers or memory
+locations to the values as appropriate.
+
+We will demonstrate how to use values with a simple example of
+adding two local variables together and putting the result into a
+third local variable.  First, we allocate storage for the
+three local variables:
+
+@example
+value1 = jit_value_create(func, jit_type_int);
+value2 = jit_value_create(func, jit_type_int);
+value3 = jit_value_create(func, jit_type_int);
+@end example
+
+Here, @code{func} is the function that we are building.  To add
+@code{value1} and @code{value2} and put the result into @code{value3},
+we use the following code:
+
+@example
+temp = jit_insn_add(func, value1, value2);
+jit_insn_store(func, value3, temp);
+@end example
+
+The @code{jit_insn_add} function allocates a temporary value
+(@code{temp}) and places the result of the addition into it.
+The @code{jit_insn_store} function then stores the temporary
+result into @code{value3}.
+
+You might be tempted to think that the above code is inefficient.
+Why do we copy the result into a temporary variable first?
+Why not put the result directly to @code{value3}?
+
+Behind the scenes, the JIT will typically optimize @code{temp} away,
+resulting in the final code that you expect (i.e. @code{value3 = value1 +
+value2}).  It is simply easier to use @code{libjit} if all results
+end up in temporary variables first, so that's what we do.
+
+Using temporary values, it is very easy to convert stack machine
+bytecodes into JIT instructions.  Consider the following Java
+Virtual Machine bytecode (representing @code{value4 = value1 * value2 +
+value3}):
+
+@example
+iload 1
+iload 2
+imul
+iload 3
+iadd
+istore 4
+@end example
+
+Let us demonstrate how this code would be translated, instruction
+by instruction.  We assume that we have a @code{stack} available,
+which keeps track of the temporary values in the system.  We also
+assume that @code{jit_value_t} objects representing the local variables
+are already stored in an array called @code{locals}.
+
+@noindent
+First, we load local variable 1 onto the stack:
+
+@example
+stack[size++] = jit_insn_load(func, locals[1]);
+@end example
+
+@noindent
+We repeat this for local variable 2:
+
+@example
+stack[size++] = jit_insn_load(func, locals[2]);
+@end example
+
+@noindent
+Now we pop these two values and push their multiplication:
+
+@example
+stack[size - 2] = jit_insn_mul(func, stack[size - 2], stack[size - 1]);
+--size;
+@end example
+
+@noindent
+Next, we need to push the value of local variable 3 and add it
+to the product that we just computed:
+
+@example
+stack[size++] = jit_insn_load(func, locals[3]);
+stack[size - 2] = jit_insn_add(func, stack[size - 2], stack[size - 1]);
+--size;
+@end example
+
+@noindent
+Finally, we store the result into local variable 4:
+
+@example
+jit_insn_store(func, locals[4], stack[--size]);
+@end example
+
+@noindent
+Collecting up all of the above code, we get the following:
+
+@example
+stack[size++] = jit_insn_load(func, locals[1]);
+stack[size++] = jit_insn_load(func, locals[2]);
+stack[size - 2] = jit_insn_mul(func, stack[size - 2], stack[size - 1]);
+--size;
+stack[size++] = jit_insn_load(func, locals[3]);
+stack[size - 2] = jit_insn_add(func, stack[size - 2], stack[size - 1]);
+--size;
+jit_insn_store(func, locals[4], stack[--size]);
+@end example
+
+The JIT will optimize away most of these temporary results, leaving
+the final machine code that you expect.
+
+If the virtual machine was register-based, then a slightly different
+translation strategy would be used.  Consider the following code,
+which computes @code{reg4 = reg1 * reg2 + reg3}, with the intermediate
+result stored temporarily in @code{reg5}:
+
+@example
+mul reg5, reg1, reg2
+add reg4, reg5, reg3
+@end example
+
+You would start by allocating value objects for all of the registers
+in your system (with @code{jit_value_create}):
+
+@example
+reg[1] = jit_value_create(func, jit_type_int);
+reg[2] = jit_value_create(func, jit_type_int);
+reg[3] = jit_value_create(func, jit_type_int);
+reg[4] = jit_value_create(func, jit_type_int);
+reg[5] = jit_value_create(func, jit_type_int);
+@end example
+
+@noindent
+Then, the virtual register machine code is translated as follows:
+
+@example
+temp1 = jit_insn_mul(func, reg[1], reg[2]);
+jit_insn_store(reg[5], temp1);
+temp2 = jit_insn_add(func, reg[5], reg[3]);
+jit_insn_store(reg[4], temp2);
+@end example
+
+Each virtual register machine instruction turns into two @code{libjit}
+function calls.  The JIT will normally optimize away the temporary
+results.  If the value in @code{reg5} is not used further down the code,
+then the JIT may also be able to optimize @code{reg5} away.
+
+The rest of this section describes the functions that are available
+to create and manipulate values.
+
+
+@deftypefun jit_value_t jit_value_create (jit_function_t @var{func}, jit_type_t @var{type})
+Create a new value in the context of a function's current block.
+The value initially starts off as a block-specific temporary.
+It will be converted into a function-wide local variable if
+it is ever referenced from a different block.  Returns NULL
+if out of memory.
+
+Note: It isn't possible to refer to global variables directly using
+values.  If you need to access a global variable, then load its
+address into a temporary and use @code{jit_insn_load_relative}
+or @code{jit_insn_store_relative} to manipulate it.  It simplifies
+the JIT if it can assume that all values are local.
+@end deftypefun
+
+@deftypefun jit_value_t jit_value_create_nint_constant (jit_function_t @var{func}, jit_type_t @var{type}, jit_nint @var{const_value})
+Create a new native integer constant in the specified function.
+Returns NULL if out of memory.
+
+The @var{type} parameter indicates the actual type of the constant,
+if it happens to be something other than @code{jit_type_nint}.
+For example, the following will create an unsigned byte constant:
+
+@example
+value = jit_value_create_nint_constant(context, jit_type_ubyte, 128);
+@end example
+
+This function can be used to create constants of type @code{jit_type_sbyte},
+@code{jit_type_ubyte}, @code{jit_type_short}, @code{jit_type_ushort},
+@code{jit_type_int}, @code{jit_type_uint}, @code{jit_type_nint},
+@code{jit_type_nuint}, and all pointer types.
+@end deftypefun
+
+@deftypefun jit_value_t jit_value_create_long_constant (jit_function_t @var{func}, jit_type_t @var{type}, jit_long @var{const_value})
+Create a new 64-bit integer constant in the specified
+function.  This can also be used to create constants of
+type @code{jit_type_ulong}.  Returns NULL if out of memory.
+@end deftypefun
+
+@deftypefun jit_value_t jit_value_create_float32_constant (jit_function_t @var{func}, jit_type_t @var{type}, jit_float32 @var{const_value})
+Create a new 32-bit floating-point constant in the specified
+function.  Returns NULL if out of memory.
+@end deftypefun
+
+@deftypefun jit_value_t jit_value_create_float64_constant (jit_function_t @var{func}, jit_type_t @var{type}, jit_float64 @var{const_value})
+Create a new 64-bit floating-point constant in the specified
+function.  Returns NULL if out of memory.
+@end deftypefun
+
+@deftypefun jit_value_t jit_value_create_nfloat_constant (jit_function_t @var{func}, jit_type_t @var{type}, jit_nfloat @var{const_value})
+Create a new native floating-point constant in the specified
+function.  Returns NULL if out of memory.
+@end deftypefun
+
+@deftypefun jit_value_t jit_value_create_constant (jit_function_t @var{func}, const jit_constant *@var{const_value})
+Create a new constant from a generic constant structure in the specified
+function.  Returns NULL if out of memory or if the type in
+@var{const_value} is not suitable for a constant.
+@end deftypefun
+
+@deftypefun jit_value_t jit_value_get_param (jit_function_t @var{func}, unsigned int @var{param})
+Get the value that corresponds to a specified function parameter.
+Returns NULL if out of memory.
+@end deftypefun
+
+@deftypefun jit_value_t jit_value_get_struct_pointer (jit_function_t @var{func})
+Get the value that contains the structure return pointer for
+a function.  If the function does not have a structure return pointer
+(i.e. structures are returned in registers), then this returns NULL.
+@end deftypefun
+
+@deftypefun int jit_value_is_temporary (jit_value_t @var{value})
+Determine if a value is temporary.  i.e. its scope extends
+over a single block within its function.
+@end deftypefun
+
+@deftypefun int jit_value_is_local (jit_value_t @var{value})
+Determine if a value is local.  i.e. its scope extends
+over multiple blocks within its function.
+@end deftypefun
+
+@deftypefun int jit_value_is_constant (jit_value_t @var{value})
+Determine if a value is a constant.
+@end deftypefun
+
+@deftypefun int jit_value_is_parameter (jit_value_t @var{value})
+Determine if a value is a function parameter.
+@end deftypefun
+
+@deftypefun void jit_value_ref (jit_function_t @var{func}, jit_value_t @var{value})
+Create a reference to the specified @var{value} from the current
+block in @var{func}.  This will convert a temporary value into
+a local value if @var{value} is being referenced from a different
+block than its original.
+
+It is not necessary that @var{func} be the same function as the
+one where the value was originally created.  It may be a nested
+function, referring to a local variable in its parent function.
+@end deftypefun
+
+@deftypefun void jit_value_set_volatile (jit_value_t @var{value})
+Set a flag on a value to indicate that it is volatile.  The contents
+of the value must always be reloaded from memory, never from a
+cached register copy.
+@end deftypefun
+
+@deftypefun int jit_value_is_volatile (jit_value_t @var{value})
+Determine if a value is volatile.
+@end deftypefun
+
+@deftypefun void jit_value_set_addressable (jit_value_t @var{value})
+Set a flag on a value to indicate that it is addressable.
+This should be used when you want to take the address of a
+value (e.g. @code{&variable} in C).  The value is guaranteed
+to not be stored in a register across a function call.
+If you refer to a value from a nested function (@code{jit_value_ref}),
+then the value will be automatically marked as addressable.
+@end deftypefun
+
+@deftypefun int jit_value_is_addressable (jit_value_t @var{value})
+Determine if a value is addressable.
+@end deftypefun
+
+@deftypefun jit_type_t jit_value_get_type (jit_value_t @var{value})
+Get the type that is associated with a value.
+@end deftypefun
+
+@deftypefun jit_function_t jit_value_get_function (jit_value_t @var{value})
+Get the function which owns a particular @var{value}.
+@end deftypefun
+
+@deftypefun jit_block_t jit_value_get_block (jit_value_t @var{value})
+Get the block which owns a particular @var{value}.
+@end deftypefun
+
+@deftypefun jit_context_t jit_value_get_context (jit_value_t @var{value})
+Get the context which owns a particular @var{value}.
+@end deftypefun
+
+@deftypefun jit_constant_t jit_value_get_constant (jit_value_t @var{value})
+Get the constant value within a particular @var{value}.  The returned
+structure's @code{type} field will be @code{jit_type_void} if
+@code{value} is not a constant.
+@end deftypefun
+
+@deftypefun jit_nint jit_value_get_nint_constant (jit_value_t @var{value})
+Get the constant value within a particular @var{value}, assuming
+that its type is compatible with @code{jit_type_nint}.
+@end deftypefun
+
+@deftypefun jit_nint jit_value_get_long_constant (jit_value_t @var{value})
+Get the constant value within a particular @var{value}, assuming
+that its type is compatible with @code{jit_type_long}.
+@end deftypefun
+
+@deftypefun jit_float32 jit_value_get_float32_constant (jit_value_t @var{value})
+Get the constant value within a particular @var{value}, assuming
+that its type is compatible with @code{jit_type_float32}.
+@end deftypefun
+
+@deftypefun jit_float64 jit_value_get_float64_constant (jit_value_t @var{value})
+Get the constant value within a particular @var{value}, assuming
+that its type is compatible with @code{jit_type_float64}.
+@end deftypefun
+
+@deftypefun jit_nfloat jit_value_get_nfloat_constant (jit_value_t @var{value})
+Get the constant value within a particular @var{value}, assuming
+that its type is compatible with @code{jit_type_nfloat}.
+@end deftypefun
+
+@deftypefun int jit_value_is_true (jit_value_t @var{value})
+Determine if @var{value} is constant and non-zero.
+@end deftypefun
+
+@deftypefun int jit_constant_convert (jit_constant_t *@var{result}, const jit_constant_t *@var{value}, jit_type_t @var{type}, int @var{overflow_check})
+Convert a the constant @var{value} into a new @var{type}, and
+return its value in @var{result}.  Returns zero if the conversion
+is not possible, usually due to overflow.
+@end deftypefun
+

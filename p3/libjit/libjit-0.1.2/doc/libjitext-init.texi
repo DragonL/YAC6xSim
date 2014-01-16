@@ -1,0 +1,22 @@
+
+@c Extracted automatically from ../jit/jit-init.c - DO NOT EDIT
+
+@deftypefun void jit_init (void)
+This is normally the first function that you call when using
+@code{libjit}.  It initializes the library and prepares for
+JIT operations.
+
+The @code{jit_context_create} function also calls this, so you can
+avoid using @code{jit_init} if @code{jit_context_create} is the first
+JIT function that you use.
+
+It is safe to initialize the JIT multiple times.  Subsequent
+initializations are quietly ignored.
+@end deftypefun
+
+@deftypefun int jit_uses_interpreter (void)
+Determine if the JIT uses a fall-back interpreter to execute code
+rather than generating and executing native code.  This can be
+called prior to @code{jit_init}.
+@end deftypefun
+
